@@ -782,6 +782,106 @@
   .rodape-texto { color: rgba(255,255,255,0.7) !important; }
   .metrica-label { color: rgba(255,255,255,0.75) !important; }
 
+
+  /* ——— ANIMAÇÕES ——— */
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes dividerAppear {
+    from { opacity:0; transform: scaleX(0); }
+    to   { opacity:1; transform: scaleX(1); }
+  }
+
+  /* Capa — sequência cinematográfica */
+  .capa-pre    { animation: fadeIn 0.8s ease both; animation-delay: 0.2s; opacity: 0; }
+  .capa img    { animation: scaleIn 1.1s cubic-bezier(0.16,1,0.3,1) both; animation-delay: 0.5s; opacity: 0; }
+  .capa-tagline{ animation: fadeUp 0.8s ease both; animation-delay: 1.1s; opacity: 0; }
+  .capa-divider{ animation: dividerAppear 0.7s ease both; animation-delay: 1.5s; transform-origin: left; }
+  .capa-meta   { animation: fadeIn 0.8s ease both; animation-delay: 1.9s; opacity: 0; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+                transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.from-left  { transform: translateX(-28px); }
+  .reveal.from-right { transform: translateX(28px); }
+  .reveal.visible    { opacity: 1; transform: translate(0); }
+
+  /* Stagger filhos */
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+                transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0.00s; }
+  .reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.12s; }
+  .reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.24s; }
+  .reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.36s; }
+  .reveal-stagger.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.48s; }
+  .reveal-stagger.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay:0.60s; }
+
+  /* Sep título animado */
+  .sep { overflow: hidden; }
+  .sep-num   { opacity: 0; transform: translateY(12px);
+               transition: opacity 0.5s ease, transform 0.5s ease; }
+  .sep-titulo { opacity: 0; transform: translateY(16px);
+                transition: opacity 0.6s ease 0.12s, transform 0.6s ease 0.12s; }
+  .sep.visible .sep-num    { opacity: 1; transform: none; }
+  .sep.visible .sep-titulo { opacity: 1; transform: none; }
+
+  /* Paleta em cascata */
+  .paleta .cor {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .paleta.visible .cor:nth-child(1){ opacity:1; transform:none; transition-delay:0.00s; }
+  .paleta.visible .cor:nth-child(2){ opacity:1; transform:none; transition-delay:0.10s; }
+  .paleta.visible .cor:nth-child(3){ opacity:1; transform:none; transition-delay:0.20s; }
+  .paleta.visible .cor:nth-child(4){ opacity:1; transform:none; transition-delay:0.30s; }
+  .paleta.visible .cor:nth-child(5){ opacity:1; transform:none; transition-delay:0.40s; }
+
+  /* Cards hover */
+  .card, .card-areia, .bench-card, .dif-item, .op-box, .tipo-par, .fonte-card {
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.25s cubic-bezier(0.16,1,0.3,1);
+  }
+  .card:hover, .card-areia:hover, .bench-card:hover, .dif-item:hover, .tipo-par:hover, .fonte-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(31,42,68,0.14);
+  }
+  .op-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+  }
+  .frase-item {
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    cursor: default;
+  }
+  .frase-item:hover {
+    transform: translateX(8px);
+    box-shadow: -4px 0 0 var(--caramelo), 6px 12px 28px rgba(31,42,68,0.1);
+  }
+
+  /* Métricas hover */
+  .metrica { transition: background 0.25s ease; cursor: default; }
+  .metrica:hover { background: rgba(255,255,255,0.08) !important; }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
+
 </style>
 </head>
 <body>
@@ -2138,6 +2238,186 @@
   <p class="rodape-texto">Brand Book Cozinha Antonina · Documento Confidencial · 2025</p>
   <p class="rodape-texto" style="margin-top:8px; opacity:0.5">Todos os direitos reservados · Uso exclusivo interno</p>
 </div>
+
+
+<script>
+// =============================================
+// INTERSECTION OBSERVER — SCROLL REVEAL
+// =============================================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Métricas: iniciar contagem
+      if (entry.target.classList.contains('metrica-num')) {
+        animateCount(entry.target);
+      }
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+// =============================================
+// APLICAR CLASSES DE REVEAL AUTOMATICAMENTE
+// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Seções separadoras
+  document.querySelectorAll('.sep').forEach(el => observer.observe(el));
+
+  // Paleta de cores
+  document.querySelectorAll('.paleta').forEach(el => observer.observe(el));
+
+  // Blocos de seção — h2, h3, p grandes
+  document.querySelectorAll('section > h2, section > .grande, section > p:first-of-type').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+
+  // Cards em grid — stagger automático
+  document.querySelectorAll('.grid-2, .grid-3, .grid-4').forEach(grid => {
+    grid.classList.add('reveal-stagger');
+    observer.observe(grid);
+  });
+
+  // Blocos individuais relevantes
+  document.querySelectorAll(
+    '.card, .card-dark, .card-areia, .bench-card, .dif-item, .op-box, ' +
+    '.frase-lista, .tom-grid, .funil, .tipo-par, .fonte-card, ' +
+    '.intro-banner, .frase-bloco, .argumento-inner > *'
+  ).forEach((el, i) => {
+    if (!el.closest('.grid-2, .grid-3, .grid-4, .reveal-stagger')) {
+      el.classList.add('reveal');
+      el.style.transitionDelay = (i % 4) * 0.08 + 's';
+      observer.observe(el);
+    }
+  });
+
+  // Labels de seção (pequenos, sobem sutilmente)
+  document.querySelectorAll('.label').forEach(el => {
+    if (!el.closest('.sep') && !el.classList.contains('reveal')) {
+      el.classList.add('reveal');
+      observer.observe(el);
+    }
+  });
+
+  // Frases de marca
+  document.querySelectorAll('.frase-item').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.classList.add('from-left');
+    el.style.transitionDelay = i * 0.1 + 's';
+    observer.observe(el);
+  });
+
+  // Operações da Antonina (as 3 grandes)
+  document.querySelectorAll('.operacao').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = i * 0.15 + 's';
+    observer.observe(el);
+  });
+
+  // Linha do tempo
+  document.querySelectorAll('.argumento-inner').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+
+  // Métricas — contagem
+  document.querySelectorAll('.metrica-num').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+
+  // Blocos do "por que mudar" e argumento final
+  document.querySelectorAll(
+    '[style*="background: var(--preto)"] > div > *,' +
+    '[style*="background:var(--preto)"] > div > *'
+  ).forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = i * 0.12 + 's';
+    observer.observe(el);
+  });
+});
+
+// =============================================
+// CONTADOR ANIMADO DE MÉTRICAS
+// =============================================
+function animateCount(el) {
+  const text = el.textContent.trim();
+
+  // Detectar tipo: porcentagem, multiplicador, moeda, infinito
+  if (text === '∞' || text === 'R$0' || text === 'R$ 0') return; // não conta esses
+
+  const isX = text.endsWith('x');
+  const isPct = text.includes('%');
+  const isPlus = text.startsWith('+');
+
+  let raw = text.replace(/[^0-9]/g, '');
+  if (!raw) return;
+
+  const target = parseInt(raw);
+  const duration = 1400;
+  const start = performance.now();
+
+  const prefix = isPlus ? '+' : '';
+  const suffix = isX ? 'x' : isPct ? '%' : '';
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // easeOutExpo
+    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const current = Math.round(eased * target);
+    el.textContent = prefix + current + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = text; // restaura original com formatação exata
+  }
+
+  el.textContent = prefix + '0' + suffix;
+  requestAnimationFrame(step);
+}
+
+// =============================================
+// PARALLAX SUAVE NA CAPA
+// =============================================
+const capaImg = document.querySelector('.capa img');
+if (capaImg) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      capaImg.style.transform = `scale(1) translateY(${y * 0.12}px)`;
+    }
+  }, { passive: true });
+}
+
+// =============================================
+// LINHA DECORATIVA NOS SEPARADORES
+// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.sep').forEach(sep => {
+    const line = document.createElement('div');
+    line.style.cssText = `
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s cubic-bezier(0.16,1,0.3,1) 0.3s;
+      margin-top: 28px;
+    `;
+    sep.appendChild(line);
+
+    const lineObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          line.style.transform = 'scaleX(1)';
+          lineObs.unobserve(sep);
+        }
+      });
+    }, { threshold: 0.5 });
+    lineObs.observe(sep);
+  });
+});
+</script>
 
 </body>
 </html>
