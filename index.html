@@ -757,15 +757,113 @@
   }
 
   @media (max-width: 768px) {
-    .secao { padding: 60px 24px; }
-    .secao-full { padding: 60px 24px; }
-    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    /* ——— SEÇÕES BASE ——— */
+    .secao { padding: 48px 20px; }
+    .secao-full { padding: 48px 20px; }
+    .sep { padding: 48px 20px; }
+    .capa { padding: 60px 20px; }
+    .argumento { padding: 56px 20px; }
+    .frase-bloco { padding: 52px 20px; }
+    .intro-banner { padding: 56px 20px; }
+    .rodape { padding: 40px 20px; }
+
+    /* ——— GRIDS → 1 coluna ——— */
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
+    .tom-grid { grid-template-columns: 1fr; gap: 16px; }
+    .metrica-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
     .paleta { grid-template-columns: repeat(3, 1fr); }
-    .tom-grid { grid-template-columns: 1fr; }
-    .metrica-grid { grid-template-columns: 1fr 1fr; }
-    .capa { padding: 60px 24px; }
-    .argumento { padding: 60px 24px; }
-    .frase-bloco { padding: 60px 24px; }
+
+    /* ——— PALETA: altura menor ——— */
+    .paleta .cor { min-height: 120px !important; }
+
+    /* ——— CARDS: padding menor ——— */
+    .card, .card-dark, .card-areia { padding: 28px 20px; }
+    .operacao { padding: 32px 20px; }
+    .op-box { padding: 28px 20px; }
+    .tipo-par { padding: 28px 20px; }
+    .fonte-card { padding: 28px 20px; }
+    .bench-card { padding: 24px 20px; }
+    .dif-item { padding: 24px 20px; }
+    .frase-item { padding: 20px 20px; }
+
+    /* ——— CAPA: nome menor ——— */
+    .capa-nome { letter-spacing: -1px; }
+
+    /* ——— ARGUMENTO FINAL: inner sem overflow ——— */
+    .argumento-inner { width: 100%; }
+
+    /* ——— NÚMERO DECORATIVO: esconder em mobile ——— */
+    .numero-secao { display: none; }
+    .numero-grande { display: none; }
+
+    /* ——— INDENT: menos padding ——— */
+    .indent { padding-left: 20px; }
+
+    /* ——— FUNIL ——— */
+    .funil { padding: 0 4px; }
+    .funil-etapa { padding: 16px 16px; font-size: 14px; }
+
+    /* ——— MÉTRICAS: fonte menor ——— */
+    .metrica { padding: 28px 12px; }
+
+    /* ——— SEÇÕES INLINE COM GRID ——— */
+    /* Classe auxiliar adicionada via JS para seções inline */
+    .mob-stack {
+      display: block !important;
+    }
+    .mob-stack > div {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-height: auto !important;
+      padding: 36px 20px !important;
+      border-right: none !important;
+      border-left: none !important;
+      order: unset !important;
+    }
+
+    /* ——— LINHA DO TEMPO: esconder versão desktop ——— */
+    .timeline-desktop { display: none !important; }
+    .timeline-mobile { display: flex !important; }
+
+    /* ——— INTRO SEÇÃO 05 ——— */
+    .intro-sec05 {
+      display: block !important;
+      padding: 40px 20px 0 !important;
+    }
+    .intro-sec05 > div {
+      display: block !important;
+    }
+    .intro-sec05 h2 { margin-bottom: 20px !important; }
+
+    /* ——— SEÇÕES DE OPERAÇÕES ——— */
+    .op-section-inner {
+      display: block !important;
+      min-height: auto !important;
+    }
+    .op-section-inner > div {
+      width: 100% !important;
+      padding: 36px 20px !important;
+      border-right: none !important;
+      border-left: none !important;
+      min-height: auto !important;
+      order: unset !important;
+    }
+
+    /* ——— ARGUMENTO FINAL: grid interno ——— */
+    .argumento .grid-2 { grid-template-columns: 1fr; gap: 24px; }
+
+    /* ——— LOGO BOX: menor ——— */
+    .logo-box { padding: 32px 20px; min-height: 120px; }
+    .logo-texto { font-size: 28px; }
+
+    /* ——— TIPO AMOSTRA ——— */
+    .tipo-titulo-sample { font-size: 32px; }
+
+    /* ——— FONTE DISPLAY ——— */
+    .fonte-display { font-size: clamp(28px, 8vw, 42px) !important; }
+
+    /* ——— FONTE CARD GRID-2 INTERNO ——— */
+    .fonte-card .grid-2 { grid-template-columns: 1fr; gap: 16px; }
   }
 
   /* ——— LEGIBILIDADE EM FUNDOS ESCUROS ——— */
@@ -879,10 +977,71 @@
   .metrica { transition: background 0.25s ease; cursor: default; }
   .metrica:hover { background: rgba(255,255,255,0.08) !important; }
 
-  /* Smooth scroll */
-  html { scroll-behavior: smooth; }
+  /* ——— MOBILE ADICIONAL: inline-styled elements ——— */
+  @media (max-width: 768px) {
 
-</style>
+    /* Intro seção 05 */
+    .intro-sec05 { padding: 40px 20px 0 !important; }
+
+    /* Operações internas — padding e grid */
+    .op-section-inner { display: block !important; min-height: auto !important; }
+    .op-section-inner > div {
+      padding: 36px 20px !important;
+      border-right: none !important;
+      border-left: none !important;
+      min-height: auto !important;
+      order: unset !important;
+    }
+
+    /* Horário grande nas operações */
+    .op-section-inner [style*="font-family:'Playfair Display'"][style*="font-size:clamp(48px"] {
+      font-size: clamp(40px, 12vw, 64px) !important;
+    }
+
+    /* Menu items com justify-content space-between — deixar em coluna */
+    .op-section-inner [style*="justify-content:space-between"],
+    .op-section-inner [style*="justify-content: space-between"] {
+      flex-direction: column !important;
+      gap: 4px !important;
+      align-items: flex-start !important;
+    }
+
+    /* Tags inline das operações */
+    .op-section-inner [style*="display:flex"][style*="align-items:center"][style*="gap:20px"] {
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+    }
+
+    /* Fontes banidas — grid-4 vira 2 colunas */
+    .card-dark .grid-4 {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 16px !important;
+    }
+
+    /* Argumento final: padding interno */
+    .argumento [style*="padding:48px"] {
+      padding: 28px 20px !important;
+    }
+
+    /* Rodapé / seção final */
+    section.secao.bg-azul { padding: 48px 20px !important; }
+
+    /* Funil */
+    .funil { max-width: 100%; }
+
+    /* Logo boxes: grid-2 vira 1 col */
+    .logo-box { min-height: 100px; padding: 32px 20px; }
+
+    /* Separador sep-titulo não quebra feio */
+    .sep-titulo { font-size: clamp(28px, 8vw, 48px); }
+
+    /* Capa nome ainda menor em telas muito pequenas */
+    @media (max-width: 380px) {
+      .capa-nome { font-size: clamp(52px, 16vw, 72px); letter-spacing: -1px; }
+    }
+  }
+
+
 </head>
 <body>
 
@@ -1122,10 +1281,10 @@
 </div>
 
 <!-- INTRO DA SEÇÃO -->
-<div style="background:var(--creme); padding:72px 60px 0;">
+<div class="intro-sec05" style="background:var(--creme); padding:72px 60px 0;">
   <div style="max-width:1100px; margin:0 auto;">
     <span class="label">As três operações da Antonina</span>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:end;">
+    <div class="grid-2" style="align-items:end;">
       <h2 style="margin:0">Um lugar que muda de ritmo,<br>mas não muda de alma.</h2>
       <p style="margin:0; font-size:17px; color:var(--cinza); line-height:1.8;">A Antonina não é três negócios. É um negócio que funciona em três momentos do dia. A identidade é a mesma — comida de verdade, atendimento sem frescura — mas o clima, o cardápio e a velocidade se adaptam.</p>
     </div>
@@ -1134,46 +1293,78 @@
 
 <!-- LINHA DO TEMPO -->
 <div style="background:var(--creme); padding:48px 60px 0;">
-  <div style="max-width:1100px; margin:0 auto; display:flex; align-items:center; gap:0;">
-    <div style="flex:1; height:3px; background:linear-gradient(to right, #E8A84B, #6F7D5C);"></div>
-    <div style="display:flex; gap:0; position:relative; width:100%; max-width:800px;">
-      <div style="flex:1; text-align:center; position:relative;">
-        <div style="width:14px; height:14px; border-radius:50%; background:#E8A84B; margin:0 auto; position:relative; z-index:1;"></div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#B86B2B; margin-top:10px;">06h30</div>
+  <div style="max-width:1100px; margin:0 auto;">
+
+    <!-- Desktop timeline -->
+    <div class="timeline-desktop" style="display:flex; align-items:center; gap:0;">
+      <div style="flex:1; height:3px; background:linear-gradient(to right, #E8A84B, #6F7D5C);"></div>
+      <div style="display:flex; gap:0; position:relative; width:100%; max-width:800px;">
+        <div style="flex:1; text-align:center; position:relative;">
+          <div style="width:14px; height:14px; border-radius:50%; background:#E8A84B; margin:0 auto; position:relative; z-index:1;"></div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#B86B2B; margin-top:10px;">06h30</div>
+        </div>
+        <div style="flex:1; height:3px; background:linear-gradient(to right, #E8A84B, #6F7D5C); align-self:center;"></div>
+        <div style="text-align:center; position:relative;">
+          <div style="width:14px; height:14px; border-radius:50%; background:#E8A84B; margin:0 auto; position:relative; z-index:1;"></div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#B86B2B; margin-top:10px;">09h00</div>
+        </div>
+        <div style="flex:2; height:3px; background:linear-gradient(to right, #6F7D5C, #6F7D5C); align-self:center;"></div>
+        <div style="text-align:center; position:relative;">
+          <div style="width:14px; height:14px; border-radius:50%; background:#6F7D5C; margin:0 auto; position:relative; z-index:1;"></div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#6F7D5C; margin-top:10px;">11h00</div>
+        </div>
+        <div style="flex:2; height:3px; background:linear-gradient(to right, #6F7D5C, #1F2A44); align-self:center;"></div>
+        <div style="text-align:center; position:relative;">
+          <div style="width:14px; height:14px; border-radius:50%; background:#6F7D5C; margin:0 auto; position:relative; z-index:1;"></div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#6F7D5C; margin-top:10px;">15h00</div>
+        </div>
+        <div style="flex:1; height:3px; background:linear-gradient(to right, #1F2A44, #1F2A44); align-self:center;"></div>
+        <div style="text-align:center; position:relative;">
+          <div style="width:14px; height:14px; border-radius:50%; background:#1F2A44; margin:0 auto; position:relative; z-index:1;"></div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#1F2A44; margin-top:10px;">17h00</div>
+        </div>
+        <div style="flex:2; height:3px; background:#1F2A44; align-self:center;"></div>
+        <div style="text-align:center; position:relative;">
+          <div style="width:14px; height:14px; border-radius:50%; background:#1F2A44; margin:0 auto; position:relative; z-index:1;"></div>
+          <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#1F2A44; margin-top:10px;">22h00</div>
+        </div>
       </div>
-      <div style="flex:1; height:3px; background:linear-gradient(to right, #E8A84B, #6F7D5C); align-self:center;"></div>
-      <div style="text-align:center; position:relative;">
-        <div style="width:14px; height:14px; border-radius:50%; background:#E8A84B; margin:0 auto; position:relative; z-index:1;"></div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#B86B2B; margin-top:10px;">09h00</div>
+      <div style="flex:1; height:3px; background:#1F2A44;"></div>
+    </div>
+
+    <!-- Mobile timeline -->
+    <div class="timeline-mobile" style="display:none; flex-direction:column; gap:0;">
+      <div style="display:flex; align-items:center; gap:16px; padding:12px 0; border-left:3px solid #E8A84B; padding-left:20px;">
+        <div style="min-width:10px; width:10px; height:10px; border-radius:50%; background:#E8A84B;"></div>
+        <div>
+          <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:2px; color:#B86B2B; font-weight:700;">06h30 → 09h00</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#4A4A4A; margin-top:2px;">Café da calçada · Manhã</div>
+        </div>
       </div>
-      <div style="flex:2; height:3px; background:linear-gradient(to right, #6F7D5C, #6F7D5C); align-self:center;"></div>
-      <div style="text-align:center; position:relative;">
-        <div style="width:14px; height:14px; border-radius:50%; background:#6F7D5C; margin:0 auto; position:relative; z-index:1;"></div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#6F7D5C; margin-top:10px;">11h00</div>
+      <div style="width:3px; height:20px; background:linear-gradient(to bottom,#E8A84B,#6F7D5C); margin-left:23px;"></div>
+      <div style="display:flex; align-items:center; gap:16px; padding:12px 0; border-left:3px solid #6F7D5C; padding-left:20px;">
+        <div style="min-width:10px; width:10px; height:10px; border-radius:50%; background:#6F7D5C;"></div>
+        <div>
+          <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:2px; color:#6F7D5C; font-weight:700;">11h00 → 15h00</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#4A4A4A; margin-top:2px;">Principal operação · Almoço</div>
+        </div>
       </div>
-      <div style="flex:2; height:3px; background:linear-gradient(to right, #6F7D5C, #1F2A44); align-self:center;"></div>
-      <div style="text-align:center; position:relative;">
-        <div style="width:14px; height:14px; border-radius:50%; background:#6F7D5C; margin:0 auto; position:relative; z-index:1;"></div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#6F7D5C; margin-top:10px;">15h00</div>
-      </div>
-      <div style="flex:1; height:3px; background:linear-gradient(to right, #1F2A44, #1F2A44); align-self:center;"></div>
-      <div style="text-align:center; position:relative;">
-        <div style="width:14px; height:14px; border-radius:50%; background:#1F2A44; margin:0 auto; position:relative; z-index:1;"></div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#1F2A44; margin-top:10px;">17h00</div>
-      </div>
-      <div style="flex:2; height:3px; background:#1F2A44; align-self:center;"></div>
-      <div style="text-align:center; position:relative;">
-        <div style="width:14px; height:14px; border-radius:50%; background:#1F2A44; margin:0 auto; position:relative; z-index:1;"></div>
-        <div style="font-family:'Courier Prime',monospace; font-size:11px; letter-spacing:2px; color:#1F2A44; margin-top:10px;">22h00</div>
+      <div style="width:3px; height:20px; background:linear-gradient(to bottom,#6F7D5C,#1F2A44); margin-left:23px;"></div>
+      <div style="display:flex; align-items:center; gap:16px; padding:12px 0; border-left:3px solid #1F2A44; padding-left:20px;">
+        <div style="min-width:10px; width:10px; height:10px; border-radius:50%; background:#1F2A44;"></div>
+        <div>
+          <div style="font-family:'Courier Prime',monospace; font-size:12px; letter-spacing:2px; color:#1F2A44; font-weight:700;">17h00 → 22h00</div>
+          <div style="font-family:'DM Sans',sans-serif; font-size:13px; color:#4A4A4A; margin-top:2px;">Happy hour leve · Noite (Fase 2)</div>
+        </div>
       </div>
     </div>
-    <div style="flex:1; height:3px; background:#1F2A44;"></div>
+
   </div>
 </div>
 
 <!-- OP 01 — MANHÃ -->
 <div style="background:#FDF6EE; margin-top:2px;">
-  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; min-height:480px;">
+  <div class="op-section-inner" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; min-height:480px;">
 
     <!-- Esquerda: identidade -->
     <div style="padding:72px 60px; border-right:1px solid rgba(184,107,43,0.15); display:flex; flex-direction:column; justify-content:space-between;">
@@ -1230,7 +1421,7 @@
 
 <!-- OP 02 — ALMOÇO -->
 <div style="background:#F3F7F0; margin-top:2px;">
-  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; min-height:560px;">
+  <div class="op-section-inner" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; min-height:560px;">
 
     <!-- Esquerda: cardápio (invertido) -->
     <div style="padding:72px 60px; background:#EDF3E8; order:1;">
@@ -1297,7 +1488,7 @@
 
 <!-- OP 03 — NOITE -->
 <div style="background:#1F2A44; margin-top:2px;">
-  <div style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; min-height:480px;">
+  <div class="op-section-inner" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; min-height:480px;">
 
     <!-- Esquerda: identidade -->
     <div style="padding:72px 60px; border-right:1px solid rgba(255,255,255,0.08); display:flex; flex-direction:column; justify-content:space-between;">
@@ -2376,6 +2567,21 @@ function animateCount(el) {
   el.textContent = prefix + '0' + suffix;
   requestAnimationFrame(step);
 }
+
+// =============================================
+// TIMELINE MOBILE — MOSTRAR/ESCONDER
+// =============================================
+function updateTimeline() {
+  const isMobile = window.innerWidth <= 768;
+  document.querySelectorAll('.timeline-desktop').forEach(el => {
+    el.style.display = isMobile ? 'none' : 'flex';
+  });
+  document.querySelectorAll('.timeline-mobile').forEach(el => {
+    el.style.display = isMobile ? 'flex' : 'none';
+  });
+}
+updateTimeline();
+window.addEventListener('resize', updateTimeline);
 
 // =============================================
 // PARALLAX SUAVE NA CAPA
