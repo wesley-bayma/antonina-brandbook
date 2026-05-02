@@ -629,35 +629,39 @@
 
     /* ——— METRICAS ——— */
     .metrica-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       margin-top: 48px;
     }
 
     .metrica {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 40px 24px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      background: rgba(255, 255, 255, 0.06);
+      border-left: 4px solid var(--caramelo);
+      padding: 24px 28px;
+      border-radius: 0 4px 4px 0;
     }
 
     .metrica-num {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 5vw, 56px);
+      font-size: clamp(40px, 5vw, 56px);
       font-weight: 900;
       color: var(--caramelo);
-      display: block;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 110px;
+      text-align: right;
       line-height: 1;
-      margin-bottom: 8px;
     }
 
     .metrica-label {
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.82);
-      font-family: 'Courier Prime', monospace;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.88);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
     }
 
     /* ——— FRASES DE MARCA ——— */
@@ -962,10 +966,7 @@
         gap: 16px;
       }
 
-      .metrica-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
+      /* .metrica-grid already flex column, no override needed */
 
       .paleta {
         grid-template-columns: repeat(3, 1fr);
@@ -1119,23 +1120,19 @@
         padding: 28px 20px !important;
       }
 
-      /* ——— MÉTRICAS: 1 coluna no mobile ——— */
-      .metrica-grid {
-        grid-template-columns: 1fr !important;
-        gap: 12px;
-      }
-
+      /* ——— MÉTRICAS: mobile ——— */
       .metrica {
-        padding: 32px 24px !important;
+        padding: 20px 20px !important;
+        gap: 20px !important;
       }
 
       .metrica-num {
-        font-size: clamp(40px, 12vw, 56px) !important;
+        font-size: clamp(36px, 10vw, 48px) !important;
+        min-width: 90px !important;
       }
 
       .metrica-label {
-        font-size: 13px !important;
-        letter-spacing: 1px !important;
+        font-size: 14px !important;
       }
 
       /* ——— RODAPÉ / SEÇÃO FINAL ——— */
@@ -1702,7 +1699,8 @@
         </div>
         <div class="metrica">
           <span class="metrica-num">+60%</span>
-          <span class="metrica-label">Ticket médio maior quando a percepção de valor é alta vs. marca genérica</span>
+          <span class="metrica-label">Ticket médio maior quando a percepção de valor é alta vs. uma marca
+            genérica</span>
         </div>
         <div class="metrica">
           <span class="metrica-num">3x</span>
