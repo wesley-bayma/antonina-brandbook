@@ -964,7 +964,7 @@
 
       .metrica-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 2px;
+        gap: 12px;
       }
 
       .paleta {
@@ -1109,8 +1109,33 @@
         gap: 24px;
       }
 
-      .argumento [style*="padding:48px"] {
+      .argumento [style*="padding:48px"],
+      .argumento [style*="padding: 48px"] {
         padding: 28px 20px !important;
+      }
+
+      .argumento [style*="padding:40px 48px"],
+      .argumento [style*="padding: 40px 48px"] {
+        padding: 28px 20px !important;
+      }
+
+      /* ——— MÉTRICAS: 1 coluna no mobile ——— */
+      .metrica-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+      }
+
+      .metrica {
+        padding: 32px 24px !important;
+      }
+
+      .metrica-num {
+        font-size: clamp(40px, 12vw, 56px) !important;
+      }
+
+      .metrica-label {
+        font-size: 13px !important;
+        letter-spacing: 1px !important;
       }
 
       /* ——— RODAPÉ / SEÇÃO FINAL ——— */
